@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 import com.packages.strings.*;
 import com.packages.arrays.*;
+import com.packages.linked_list.*;
+import com.packages.records.*;
 
 public class Main {
     // Colores ANSI para la terminal
@@ -30,6 +32,8 @@ public class Main {
             System.out.println(PURPLE + "    [1] Cadenas de caracteres" + RESET);
             System.out.println(PURPLE + "    [2] Vectores" + RESET);
             System.out.println(PURPLE + "    [3] Matrices" + RESET);
+            System.out.println(PURPLE + "    [4] Registros" + RESET);
+            System.out.println(PURPLE + "    [5] Lista Simplemente Ligada" + RESET);
             System.out.println(SEPARATOR);
             System.out.print(BOLD + PURPLE + "\nSeleccione una opción: " + RESET);
             resp = input.nextLine();
@@ -51,6 +55,14 @@ public class Main {
                 case "3":
                     // Ir al menú de matrices
                     menuMatrix();
+                    break;
+                case "4":
+                    // Ir al menú de registros
+                    menuRecords();
+                    break;
+                case "5":
+                    // Ir al menú de lista simplemente ligada
+                    menuLSL();
                     break;
                 default:
                     // Opción inválida
@@ -78,6 +90,7 @@ public class Main {
             System.out.println(PURPLE + "    [6] Palíndromo" + RESET);
             System.out.println(PURPLE + "    [7] Ejemplos cadenas" + RESET);
             System.out.println(PURPLE + "    [8] Contar carácter del usuario" + RESET);
+            System.out.println(PURPLE + "    [9] Convertir cadena a ASCII" + RESET);
             System.out.println(SEPARATOR);
             System.out.print(BOLD + PURPLE + "\nSeleccione una opción: " + RESET);
             resp = input.nextLine();
@@ -126,6 +139,10 @@ public class Main {
                     System.out.println(YELLOW + BOLD + "\nEl carácter '" + charUser + "' se encuentra "
                             + str.countChar(charUser) + " veces." + RESET);
                     break;
+                case "9":
+                    // Convertir cadena a ASCII
+                    System.out.println(YELLOW + BOLD + "\nCadena ASCII: " + str.stringASCII() + RESET);
+                    break;
                 default:
                     // Opción inválida
                     System.out.println(YELLOW + BOLD + "\nOpción no válida" + RESET);
@@ -163,6 +180,9 @@ public class Main {
             System.out.println(PURPLE + "    [13] Varianza" + RESET);
             System.out.println(PURPLE + "    [14] Desviación" + RESET);
             System.out.println(PURPLE + "    [15] Intercambio" + RESET);
+            System.out.println(PURPLE + "    [16] Producto punto" + RESET);
+            System.out.println(PURPLE + "    [17] Eliminar ocurrencias" + RESET);
+            System.out.println(PURPLE + "    [18] Verificar orden ascendente" + RESET);
 
             System.out.println(SEPARATOR);
 
@@ -356,6 +376,32 @@ public class Main {
                     }
                     break;
 
+                case "16":
+                    // Producto punto entre dos vectores
+                    int[] v1 = {2, 5, -6};
+                    int[] v2 = {1, 8, 4};
+                    System.out.println(YELLOW + BOLD + "Producto punto: " + v.productPoint(v1, v2, 3) + RESET);
+                    break;
+
+                case "17":
+                    // Eliminar ocurrencias
+                    if (v.getN() > 0) {
+                        v.deleteOcurrencies();
+                        System.out.println(YELLOW + BOLD + "Ocurrencias eliminadas" + RESET);
+                    } else {
+                        System.out.println(YELLOW + BOLD + "Vector vacío" + RESET);
+                    }
+                    break;
+
+                case "18":
+                    // Verificar orden ascendente
+                    if (v.getN() > 0) {
+                        System.out.println(YELLOW + BOLD + "Orden ascendente: " + v.sortAsc() + RESET);
+                    } else {
+                        System.out.println(YELLOW + BOLD + "Vector vacío" + RESET);
+                    }
+                    break;
+
                 default:
                     System.out.println(YELLOW + BOLD + "\nOpción no válida" + RESET);
             }
@@ -479,6 +525,105 @@ public class Main {
                     break;
             }
 
+        } while (!resp.equals("0"));
+    }
+
+    // Menú de registros (personas)
+    public static void menuRecords() {
+        String name, resp;
+        byte age;
+        Persons per = new Persons();
+
+        do {
+            System.out.println(SEPARATOR);
+            System.out.println(BOLD + CYAN + "\n    ╔══════════════════════════════╗" + RESET);
+            System.out.println(BOLD + CYAN + "    ║       Menú Registros         ║" + RESET);
+            System.out.println(BOLD + CYAN + "    ╚══════════════════════════════╝\n" + RESET);
+
+            System.out.println(PURPLE + "    [0] Regresar" + RESET);
+            System.out.println(PURPLE + "    [1] Agregar dato" + RESET);
+            System.out.println(PURPLE + "    [3] Mostrar" + RESET);
+            System.out.println(PURPLE + "    [4] Persona joven" + RESET);
+            System.out.println(SEPARATOR);
+
+            System.out.print(BOLD + PURPLE + "\nSeleccione una opción: " + RESET);
+            resp = input.nextLine();
+
+            switch (resp) {
+                case "0":
+                    // Regresar al menú principal
+                    break;
+                case "1":
+                    // Agregar una nueva persona
+                    System.out.print(PURPLE + "Nombre: " + RESET);
+                    name = input.nextLine();
+                    System.out.print(PURPLE + "Edad: " + RESET);
+                    age = input.nextByte();
+                    input.nextLine();
+                    per.createPerson(name, age);
+                    System.out.println(YELLOW + BOLD + "Persona agregada correctamente" + RESET);
+                    break;
+                case "3":
+                    // Mostrar todas las personas registradas
+                    per.showPerson();
+                    break;
+                case "4":
+                    // Mostrar la persona más joven
+                    per.youngPerson();
+                    break;
+                default:
+                    System.out.println(YELLOW + BOLD + "\nOpción no válida" + RESET);
+                    break;
+            }
+        } while (!resp.equals("0"));
+    }
+
+    // Menú de Lista Simplemente Ligada
+    public static void menuLSL() {
+        int datum;
+        String resp;
+        LSL list = new LSL();
+
+        do {
+            System.out.println(SEPARATOR);
+            System.out.println(BOLD + CYAN + "\n    ╔══════════════════════════════╗" + RESET);
+            System.out.println(BOLD + CYAN + "    ║    Menú Lista Simplemente    ║" + RESET);
+            System.out.println(BOLD + CYAN + "    ║         Ligada (LSL)         ║" + RESET);
+            System.out.println(BOLD + CYAN + "    ╚══════════════════════════════╝\n" + RESET);
+
+            System.out.println(PURPLE + "    [0] Regresar" + RESET);
+            System.out.println(PURPLE + "    [1] Agregar dato" + RESET);
+            System.out.println(PURPLE + "    [3] Mostrar" + RESET);
+            System.out.println(PURPLE + "    [4] Suma" + RESET);
+            System.out.println(SEPARATOR);
+
+            System.out.print(BOLD + PURPLE + "\nSeleccione una opción: " + RESET);
+            resp = input.nextLine();
+
+            switch (resp) {
+                case "0":
+                    // Regresar al menú principal
+                    break;
+                case "1":
+                    // Agregar un dato al inicio de la lista
+                    System.out.print(PURPLE + "Dato a agregar: " + RESET);
+                    datum = input.nextInt();
+                    input.nextLine();
+                    list.createBeginLSL(datum);
+                    System.out.println(YELLOW + BOLD + "Dato agregado correctamente" + RESET);
+                    break;
+                case "3":
+                    // Mostrar los datos de la lista
+                    list.showLSL();
+                    break;
+                case "4":
+                    // Mostrar la suma de todos los nodos
+                    System.out.println(YELLOW + BOLD + "Suma: " + list.sumNodesLSL() + RESET);
+                    break;
+                default:
+                    System.out.println(YELLOW + BOLD + "\nOpción no válida" + RESET);
+                    break;
+            }
         } while (!resp.equals("0"));
     }
 
