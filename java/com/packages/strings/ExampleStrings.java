@@ -1,5 +1,6 @@
 package com.packages.strings;
 
+// Clase de ejemplo para demostrar operaciones y métodos de cadenas String
 public class ExampleStrings 
 {
     /**

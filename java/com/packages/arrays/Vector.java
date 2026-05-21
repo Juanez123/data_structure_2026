@@ -1,219 +1,201 @@
 package com.packages.arrays;
 
 // Clase que representa un vector (arreglo dinámico sobre un arreglo fijo) y operaciones comunes
-public class Vector 
-{
-    // Tamaño máximo del vector (capacidad del arreglo subyacente)
-    private final int T = 100;
+public class Vector {
+    private final int T = 100; // Capacidad máxima del vector
+    private int n; // Tamaño actual utilizado del vector
+    private int vec[] = new int[T]; // Arreglo interno donde se guardan los elementos
 
-    // n mantiene la cantidad actual de elementos usados en el vector
-    private int n;
-
-    // Arreglo subyacente donde se almacenan los datos
-    private int vec[] = new int[T];
-
-    // Constructor: inicia el vector vacío (n = 0)
-    public Vector()
-    {
-        n = 0;
+    public Vector() {
+        n = 0; // Inicializa el vector vacío
     }
 
-    // Devuelve la capacidad máxima del vector
-    public int getT()
-    {
-        return T;
+    public int getT() {
+        return T; // Retorna la capacidad máxima del vector
     }
 
-    // Devuelve el número actual de elementos en el vector
-    public int getN() 
-    {
-        return n;
+    public int getN() {
+        return n; // Retorna el número actual de elementos
     }
 
-    // Permite establecer manualmente el tamaño n (use con precaución)
-    public void setN(int n) 
-    {
-        this.n = n;
+    public void setN(int n) {
+        this.n = n; // Permite establecer manualmente el tamaño usado
     }
 
-    // Devuelve referencia al arreglo subyacente
-    public int[] getVec() 
-    {
-        return vec;
+    public int[] getVec() {
+        return vec; // Retorna el arreglo interno del vector
     }
 
-    // Reemplaza el arreglo subyacente (usar con precaución)
-    public void setVec(int[] vec) 
-    {
-        this.vec = vec;
+    public void setVec(int[] vec) {
+        this.vec = vec; // Reemplaza el arreglo interno del vector
     }
 
-    // Agrega un elemento al final del vector (si hay capacidad)
-    public void addVector(int datum)
-    {
-        // Inserta en la posición n y aumenta el contador
-        vec[n] = datum;
-        n++;
+    public void addVector(int datum) {
+        vec[n] = datum; // Inserta el dato en la posición final
+        n++; // Aumenta el tamaño actual
     }
 
-    // Muestra los elementos del vector separados por ' | '
-    public void showVector()
-    {
+    public void showVector() {
         for (int i = 0; i < n; i++) {
-            System.out.print(vec[i] + " | ");
+            System.out.print(vec[i] + " | "); // Imprime cada elemento separado por barra
         }
     }
 
-
-    // Búsqueda secuencial: devuelve la posición del dato si se encuentra, o -1 si no
-    public int searchSecuencial(int datum)
-    {
+    public int searchSecuencial(int datum) {
         int i, pos;
-        i = 0;
-        pos = -1;
-        while (i < n && pos == -1) {
+        i = 0; // Índice inicial para la búsqueda
+        pos = -1; // Posición de retorno si no se encuentra el dato
+        while (i < n && pos == -1) { // Recorrido hasta encontrar o terminar el vector
             if (vec[i] == datum) {
-                pos = i; // encontrado
+                pos = i; // Guarda la posición cuando encuentra el dato
             } else {
-                i++; // continuar búsqueda
+                i++; // Avanza al siguiente elemento
             }
         }
-        return pos;
-    }
-       
-    // Actualiza el elemento en la posición indicada con un nuevo dato
-    public void updateVector(int datum, int pos)
-    {
-        // Actualiza el elemento en la posición indicada
-        vec[pos] = datum;
+        return pos; // Retorna la posición o -1 si no existe
     }
 
-    // Elimina el elemento en la posición indicada y desplaza hacia la izquierda
-    public void deleteVector(int pos)
-    {
+    public void updateVector(int datum, int pos) {
+        vec[pos] = datum; // Actualiza el elemento en la posición indicada
+    }
+
+    public void deleteVector(int pos) {
         for (int i = pos; i < n - 1; i++) {
-            vec[i] = vec[i + 1];
+            vec[i] = vec[i + 1]; // Desplaza los elementos hacia la izquierda
         }
-        n--;
+        n--; // Reduce el tamaño efectivo
     }
 
-    // Inserta un dato en la posición indicada desplazando los elementos a la derecha
-    public void insertVector(int pos, int datum)
-    {
+    public void insertVector(int pos, int datum) {
         for (int i = n; i > pos; i--) {
-            vec[i] = vec[i - 1];
+            vec[i] = vec[i - 1]; // Desplaza los elementos hacia la derecha
         }
-        vec[pos] = datum;
-        n++;
+        vec[pos] = datum; // Inserta el dato en la posición deseada
+        n++; // Aumenta el tamaño efectivo
     }
 
-
-    // Ordenamiento por burbuja (simple, ordena ascendentemente)
-    public void sortBubble()
-    {
-        int aux;
+    public void sortBubble() {
+        int aux; // Variable temporal para intercambio
         for (int i = 0; i < n - 1; i++) {
             for (int j = i + 1; j < n; j++) {
                 if (vec[i] > vec[j]) {
                     aux = vec[i];
                     vec[i] = vec[j];
-                    vec[j] = aux;
+                    vec[j] = aux; // Intercambia elementos fuera de orden
                 }
             }
         }
     }
 
-    // Suma de todos los elementos del vector
-    public int sumVector()
-    {
-        int s = 0;
+    public int sumVector() {
+        int s = 0; // Acumulador de la suma
         for (int i = 0; i < n; i++) {
-            s = s + vec[i];
+            s = s + vec[i]; // Suma elemento por elemento
         }
-        return s;
+        return s; // Retorna la suma total
     }
 
-    // Producto de todos los elementos del vector
-    public int productVector()
-    {
-        int p = 1;
+    public int productVector() {
+        int p = 1; // Acumulador del producto
         for (int i = 0; i < n; i++) {
-            p = p * vec[i];
+            p = p * vec[i]; // Multiplica elemento por elemento
         }
-        return p;
+        return p; // Retorna el producto total
     }
 
-    // Promedio de los elementos (se castea a double para precisión)
-    public double avgVector()
-    {
-        return (double) sumVector() / n;
+    public double avgVector() {
+        return (double) sumVector() / n; // Calcula el promedio
     }
 
-    // Retorna el mayor elemento del vector (asume n > 0)
-    public int maxVector()
-    {
+    public int maxVector() {
         int i, m;
-        m = vec[0]; // Supuesto: el mayor elemento está en la primera posición
+        m = vec[0]; // Inicializa el mayor con el primer elemento
         for (i = 1; i < n; i++) {
             if (vec[i] > m) {
-                m = vec[i];
+                m = vec[i]; // Actualiza el mayor si se encuentra uno más grande
             }
         }
-        return m;
+        return m; // Retorna el mayor elemento
     }
 
-    // Retorna el menor elemento del vector (asume n > 0)
-    public int minVector()
-    {
+    public int minVector() {
         int i, m;
-        m = vec[0]; // Supuesto: el menor elemento está en la primera posición
+        m = vec[0]; // Inicializa el menor con el primer elemento
         for (i = 1; i < n; i++) {
             if (vec[i] < m) {
-                m = vec[i];
+                m = vec[i]; // Actualiza el menor si se encuentra uno más pequeño
             }
         }
-        return m;
+        return m; // Retorna el menor elemento
     }
 
-    // Cuenta cuántos elementos en posiciones pares (0,2,4,...) son impares
-    public int totalOddPositionEven()
-    {
+    public int totalOddPositionEven() {
         int i, c;
-        c = 0;
+        c = 0; // Contador de elementos impares en posiciones pares
         for (i = 0; i < n; i += 2) {
             if (vec[i] % 2 == 1) {
-                c++;
+                c++; // Incrementa el contador cuando el elemento es impar
             }
         }
-        return c;
+        return c; // Retorna el total contado
     }
 
-    // Calcula la varianza muestral: suma de (xi - media)^2 dividido entre n-1
-    public double variance()
-    {
-        double s = 0;
-        double mean = avgVector();
+    public double variance() {
+        double s = 0; // Acumulador de la suma de cuadrados de la diferencia
+        double mean = avgVector(); // Promedio del vector
         for (int i = 0; i < n; i++) {
-            s = s + Math.pow(vec[i] - mean, 2);
+            s = s + Math.pow(vec[i] - mean, 2); // Agrega el cuadrado de la diferencia
         }
-        return s / (n - 1);
+        return s / (n - 1); // Calcula la varianza muestral
     }
 
-    // Desviación estándar: raíz cuadrada de la varianza
-    public double desviation()
-    {
-        return Math.sqrt(variance());
+    public double desviation() {
+        return Math.sqrt(variance()); // Retorna la raíz cuadrada de la varianza
     }
 
-    // Intercambia elementos simétricos desde los extremos hacia el centro
-    public void interchange()
-    {
-        int aux;
+    public void interchange() {
+        int aux; // Variable temporal para intercambio
         for (int i = 0; i < n / 2; i++) {
             aux = vec[i];
             vec[i] = vec[n - i - 1];
-            vec[n - i - 1] = aux;
+            vec[n - i - 1] = aux; // Intercambia el elemento actual con su opuesto
         }
     }
-       
+
+    public int productPoint(int[] v1, int[] v2, int size) {
+        int product = 0; // Acumulador del producto punto
+        for (int i = 0; i < size; i++) {
+            product += v1[i] * v2[i]; // Suma producto de pares correspondientes
+        }
+        return product; // Retorna el resultado del producto punto
+    }
+
+    public void deleteOcurrencies() {
+        if (n <= 1) {
+            return; // Si el vector tiene 0 o 1 elemento, no hay duplicados a eliminar
+        }
+        int uniqueCount = 0; // Contador de valores únicos conservados
+        for (int i = 0; i < n; i++) {
+            boolean found = false; // Indica si el valor ya apareció antes
+            for (int j = 0; j < uniqueCount; j++) {
+                if (vec[i] == vec[j]) {
+                    found = true; // Encuentra una ocurrencia previa
+                    break;
+                }
+            }
+            if (!found) {
+                vec[uniqueCount++] = vec[i]; // Conserva el valor único
+            }
+        }
+        n = uniqueCount; // Actualiza el tamaño a la cantidad de valores únicos
+    }
+
+    public boolean sortAsc() {
+        for (int i = 0; i < n - 1; i++) {
+            if (vec[i] > vec[i + 1]) {
+                return false; // Encuentra un par fuera de orden
+            }
+        }
+        return true; // El vector está ordenado ascendentemente
+    }
 }

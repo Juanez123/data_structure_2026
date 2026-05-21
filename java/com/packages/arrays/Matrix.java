@@ -1,173 +1,127 @@
 package com.packages.arrays;
 
 // Clase para operaciones básicas con matrices estáticas (tamaño máximo TR x TC)
-public class Matrix 
-{
-    // Tamaños máximos permitidos para filas (TR) y columnas (TC)
-    private final int TR = 50;
-    private final int TC = 50;
+public class Matrix {
+    private final int TR = 50; // Capacidad máxima de filas
+    private final int TC = 50; // Capacidad máxima de columnas
 
-    // m y n representan el número actual de filas y columnas usadas
-    private int m, n;
+    private int m, n; // Dimensiones actuales efectivas de la matriz
 
-    // Matriz principal (inicializada con tamaño máximo) y matriz para almacenar sumas
-    private int mat[][] = new int[TR][TC];
-    private int matSum[][] = new int[TR][TC];
+    private int mat[][] = new int[TR][TC]; // Matriz principal para datos
+    private int matSum[][] = new int[TR][TC]; // Matriz que almacena el resultado de sumas
 
-    // Constructor: inicializa m y n en 0 (matriz vacía hasta establecer dimensiones)
-    public Matrix()
-    {
-        m = 0;
-        n = 0;
+    public Matrix() {
+        m = 0; // Inicializa filas en 0
+        n = 0; // Inicializa columnas en 0
     }
 
-    // Getters para los tamaños máximos (constantes)
-    public int getTR() 
-    {
-        return TR;
+    public int getTR() {
+        return TR; // Retorna la capacidad máxima de filas
     }
 
-    public int getTC() 
-    {
-        return TC;
+    public int getTC() {
+        return TC; // Retorna la capacidad máxima de columnas
     }
 
-    // Devuelve el número actual de filas
-    public int getM() 
-    {
-        return m;
+    public int getM() {
+        return m; // Retorna el número actual de filas utilizadas
     }
 
-    // Establece el número de filas a usar (debe ser <= TR)
-    public void setM(int m) 
-    {
-        this.m = m;
+    public void setM(int m) {
+        this.m = m; // Actualiza el número de filas efectivas
     }
 
-    // Devuelve el número actual de columnas
-    public int getN() 
-    {
-        return n;
+    public int getN() {
+        return n; // Retorna el número actual de columnas utilizadas
     }
 
-    // Establece el número de columnas a usar (debe ser <= TC)
-    public void setN(int n) 
-    {
-        this.n = n;
+    public void setN(int n) {
+        this.n = n; // Actualiza el número de columnas efectivas
     }
 
-    
-    // Devuelve la referencia a la matriz principal
-    public int[][] getMat() 
-    {
-        return mat;
+    public int[][] getMat() {
+        return mat; // Retorna la referencia a la matriz principal
     }
 
-    // Devuelve la referencia a la matriz donde se almacena la suma de matrices
-    public int[][] getMatSum() 
-    {
-        return matSum;
-    }  
+    public int[][] getMatSum() {
+        return matSum; // Retorna la matriz de suma calculada
+    }
 
-    // Crea (rellena) la matriz con valores aleatorios entre 0 y 99
-    // Usa m y n como dimensiones efectivas; la matriz subyacente tiene capacidad TR x TC
-    public void createMatrix()
-    {
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                mat[i][j] = (int)(Math.random() * 100);
+    public void createMatrix() {
+        for (int i = 0; i < m; i++) { // Recorre cada fila efectiva
+            for (int j = 0; j < n; j++) { // Recorre cada columna efectiva
+                mat[i][j] = (int) (Math.random() * 100); // Asigna un valor aleatorio
             }
         }
     }
 
-    // Imprime por consola la matriz pasada como parámetro (usa m x n como dimensiones)
-    // Si desea imprimir otra matriz, pasarla como argumento, por ejemplo getMat() o getMatSum()
-    public void showMatrix(int [][] mat)
-    {
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(mat[i][j] + "\t");
+    public void showMatrix(int[][] mat) {
+        for (int i = 0; i < m; i++) { // Recorre filas efectivas
+            for (int j = 0; j < n; j++) { // Recorre columnas efectivas
+                System.out.print(mat[i][j] + "\t"); // Imprime cada elemento separado por tabulación
             }
-            System.out.println("");
+            System.out.println(""); // Salto de línea al final de cada fila
         }
     }
 
-    // Suma elemento a elemento dos matrices mat1 y mat2 (ambas deben tener dimensiones m x n)
-    // El resultado se guarda en el campo matSum
-    public void sumMatrix(int [][] mat1, int [][] mat2)
-    {
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                matSum[i][j] = mat1[i][j] + mat2[i][j];
+    public void sumMatrix(int[][] mat1, int[][] mat2) {
+        for (int i = 0; i < m; i++) { // Recorre filas
+            for (int j = 0; j < n; j++) { // Recorre columnas
+                matSum[i][j] = mat1[i][j] + mat2[i][j]; // Suma elemento a elemento
             }
         }
     }
 
-    // Imprime la diagonal principal de la matriz (asume matriz cuadrada, es decir m == n)
-    public void mainDiagonal()
-    {
-        for (int i = 0; i < n; i++) {
-            System.out.print(mat[i][i] + "\t");
+    public void mainDiagonal() {
+        for (int i = 0; i < n; i++) { // Recorre los índices de la diagonal principal
+            System.out.print(mat[i][i] + "\t"); // Imprime elemento [i][i]
         }
-        System.out.println();
+        System.out.println(); // Salto de línea final
     }
 
-    // Imprime la diagonal secundaria (desde [0][n-1] hasta [n-1][0])
-    public void secondaryDiagonal()
-    {
-        for (int i = 0; i < n; i++) {
-            System.out.print(mat[i][n - i - 1] + "\t");
+    public void secondaryDiagonal() {
+        for (int i = 0; i < n; i++) { // Recorre índices de la diagonal secundaria
+            System.out.print(mat[i][n - i - 1] + "\t"); // Imprime elemento de la diagonal secundaria
         }
-        System.out.println();
+        System.out.println(); // Salto de línea final
     }
 
-    // Imprime la "parte superior" de la matriz (elementos por encima o sobre la diagonal principal)
-    // Ahora se muestra en formato matricial respetando filas y columnas: se imprimen tabs en posiciones vacías
-    public void upTriangle()
-    {
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                // Imprime el elemento si está en o por encima de la diagonal principal (j >= i)
-                if (j >= i) {
+    public void upTriangle() {
+        for (int i = 0; i < m; i++) { // Recorre filas
+            for (int j = 0; j < n; j++) { // Recorre columnas
+                if (j >= i) { // Si la columna está en o sobre la diagonal principal
                     System.out.print(mat[i][j] + "\t");
                 } else {
-                    System.out.print("\t");
+                    System.out.print("\t"); // Espacio vacío para mantener la forma matricial
+                }
+            }
+            System.out.println(); // Salto de línea al final de la fila
+        }
+    }
+
+    public void rightTriangle() {
+        for (int i = 0; i < m; i++) { // Recorre filas
+            for (int j = 0; j < n; j++) { // Recorre columnas
+                if (j >= (n - 1 - i)) { // Si el elemento pertenece a la parte derecha
+                    System.out.print(mat[i][j] + "\t");
+                } else {
+                    System.out.print("\t"); // Espacio vacío fuera del triángulo derecho
                 }
             }
             System.out.println();
         }
     }
 
-    // Imprime la "parte derecha" triangular de la matriz en formato matricial
-    public void rightTriangle()
-    { 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                // En la mitad derecha se imprimen los elementos cuya columna j es >= n-1-i
-                if (j >= (n - 1 - i)) {
+    public void leftTriangle() {
+        for (int i = 0; i < m; i++) { // Recorre filas
+            for (int j = 0; j < n; j++) { // Recorre columnas
+                if (j <= i) { // Si el elemento pertenece a la parte izquierda
                     System.out.print(mat[i][j] + "\t");
                 } else {
-                    System.out.print("\t");
+                    System.out.print("\t"); // Espacio vacío fuera del triángulo izquierdo
                 }
             }
             System.out.println();
         }
     }
-
-    // Imprime la "parte izquierda" triangular de la matriz en formato matricial
-    public void leftTriangle()
-    { 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                // En la mitad izquierda se imprimen los elementos cuya columna j es <= i
-                if (j <= i) {
-                    System.out.print(mat[i][j] + "\t");
-                } else {
-                    System.out.print("\t");
-                }
-            }
-            System.out.println();
-        }
-    }
-
 }

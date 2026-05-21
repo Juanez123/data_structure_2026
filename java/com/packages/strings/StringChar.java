@@ -1,7 +1,7 @@
- package com.packages.strings;
+package com.packages.strings;
 
-public class StringChar 
-{
+// Clase de utilidades para manipular y analizar un texto como String
+public class StringChar {
     // campo que guarda el texto actualmente gestionado por el objeto
     String text;
 
@@ -103,11 +103,6 @@ public class StringChar
         return sw;
     }
     
-    /**
-     * Cuenta cuántas veces aparece un carácter específico en el texto actual.
-     * @param ch carácter a buscar
-     * @return cantidad de apariciones en el texto (0 si el texto es nulo o vacío)
-     */
     public int countChar(char ch)
     {
         if (this.text == null || this.text.isEmpty()) {
@@ -121,6 +116,21 @@ public class StringChar
             }
         }
         return count;
+    }
+    
+    public String stringASCII()
+    {
+        if (this.text == null || this.text.isEmpty()) {
+            return "";
+        }
+        StringBuilder ascii = new StringBuilder();
+        for (int i = 0; i < this.text.length(); i++) {
+            ascii.append((int) this.text.charAt(i));
+            if (i < this.text.length() - 1) {
+                ascii.append(" ");
+            }
+        }
+        return ascii.toString();
     }
     
 }
