@@ -4,6 +4,7 @@ import com.packages.queues.*; // Importa la clase Queue
 import com.packages.recursivity.*; // Importa la clase Recursion
 import com.packages.stacks.*; // Importa la clase Stack
 import com.packages.strings.*; // Importa StringChar y ExampleStrings
+import com.packages.trees.*; // Importa NodeTree y Trees
 import java.util.Scanner; // Importa Scanner para lectura de entrada de usuario
 
 public class Main {
@@ -39,6 +40,7 @@ public class Main {
             System.out.println(PURPLE + "8. Pilas" + RESET);
             System.out.println(PURPLE + "9. Colas" + RESET);
             System.out.println(PURPLE + "10. Recursividad" + RESET);
+            System.out.println(PURPLE + "11. Árboles binarios" + RESET);
             System.out.print(PURPLE + "Ingrese su opción: " + RESET);
             resp = input.nextLine(); // Lee la opción del usuario
 
@@ -75,6 +77,9 @@ public class Main {
                     break;
                 case "10":
                     menuRecursivity(); // Llama al menú de recursividad
+                    break;
+                case "11":
+                    menuTrees(); // Llama al menú de árboles
                     break;
                 default:
                     System.out.println(BOLD + YELLOW + "Opción no válida" + RESET);
@@ -972,5 +977,59 @@ public class Main {
                     break;
             }
         } while (!resp.equals("0")); // Repite el menú de recursividad
+    }
+
+    // Menú para árboles binarios
+    public static void menuTrees() {
+        int datum; // Dato numérico para nodos
+        String resp; // Opción seleccionada
+        Trees tree = new Trees(); // Instancia del árbol
+
+        do {
+            System.out.println(BOLD + CYAN + "╔════════════════════════════════════════════════╗" + RESET);
+            System.out.println(BOLD + CYAN + "║                MENÚ ÁRBOLES BINARIOS           ║" + RESET);
+            System.out.println(BOLD + CYAN + "╚════════════════════════════════════════════════╝" + RESET);
+            System.out.println(PURPLE + "0. Regresar" + RESET);
+            System.out.println(PURPLE + "1. Crear" + RESET);
+            System.out.println(PURPLE + "2. Recorrido preorden" + RESET);
+            System.out.println(PURPLE + "3. Recorrido inorden" + RESET);
+            System.out.println(PURPLE + "4. Recorrido postorden" + RESET);
+            System.out.print(PURPLE + "Ingrese su opción: " + RESET);
+            resp = input.nextLine(); // Lee la opción del menú de árboles
+
+            switch (resp) {
+                case "0":
+                    break; // Regresa al menú principal
+                case "1":
+                    tree.setRoot(new NodeTree()); // Crea la raíz
+                    tree.addNode(tree.getRoot()); // Construye el árbol
+                    System.out.println(WHITE + "¡Árbol binario creado!" + RESET);
+                    break;
+                case "2":
+                    if (tree.getRoot() != null) {
+                        tree.preorder(tree.getRoot());
+                    } else {
+                        System.out.println(BOLD + YELLOW + "Árbol vacío" + RESET);
+                    }
+                    break;
+                case "3":
+                    if (tree.getRoot() != null) {
+                        tree.inorder(tree.getRoot());
+                    } else {
+                        System.out.println(BOLD + YELLOW + "Árbol vacío" + RESET);
+                    }
+                    break;
+                case "4":
+                    if (tree.getRoot() != null) {
+                        tree.postorder(tree.getRoot());
+                    } else {
+                        System.out.println(BOLD + YELLOW + "Árbol vacío" + RESET);
+                    }
+                    break;
+                default:
+                    System.out.println(BOLD + YELLOW + "Opción no válida" + RESET);
+                    break;
+            }
+        } while (!resp.equals("0")); // Repite el menú de árboles
     }
 }
